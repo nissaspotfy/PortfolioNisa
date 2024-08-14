@@ -476,9 +476,9 @@ span{
 
 .projects-box{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     place-items: center;
-    gap: 12rem;
+    gap: 3rem;
     row-gap: 5rem;
 }
 
@@ -515,7 +515,7 @@ span{
     font-size: 3rem;
 }
 
-.project-cardp{
+.project-card p{
     font-size: 1.6rem;
 }
 
@@ -643,7 +643,7 @@ span{
     html{
         font-size: 55%;
     }
-    .service-container{
+    .services-container{
         padding-bottom: 7rem;
         grid-template-columns: repeat(2,1fr);
         margin: 0 5rem;
@@ -652,7 +652,7 @@ span{
 
 @media(max-width:991px){
     header{
-        pad: 2rem 3%;
+        padding: 2rem 3%;
     }
     section{
         padding: 10rem 3% 2rem;
