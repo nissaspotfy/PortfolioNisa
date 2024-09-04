@@ -258,6 +258,18 @@ span{
     40%{
         content: "Content Creator";
     }
+    41%,
+    60%{
+        content: "Blog Author";
+    }
+    61%,
+    80%{
+        content: "Voice Over";
+    }
+    /* 81%,
+    100%{
+        content: "Junior Front-End Developer";
+    } */
 
     
 
@@ -273,7 +285,7 @@ span{
     75%,
     90%,
     95%{
-        width: 0%;
+        width: 0;
     }
     5%,
     20%,
@@ -522,13 +534,6 @@ span{
 
 
 /* project akhir */
-
-
-
-
-
-
-
 
 
 .contact{
