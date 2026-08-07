@@ -1,0 +1,187 @@
+/* ===================================================
+   ANISSA PORTFOLIO — Global Styles & Design System
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --bg:          #050510;
+  --bg-2:        #0a0a1a;
+  --bg-3:        #0f0f25;
+  --surface:     rgba(255, 255, 255, 0.03);
+  --glass:       rgba(255, 255, 255, 0.05);
+  --border:      rgba(255, 255, 255, 0.08);
+
+  --cyan:        #00D4FF;
+  --cyan-dim:    rgba(0, 212, 255, 0.15);
+  --cyan-glow:   rgba(0, 212, 255, 0.4);
+  --purple:      #A855F7;
+  --purple-dim:  rgba(168, 85, 247, 0.15);
+  --purple-glow: rgba(168, 85, 247, 0.4);
+  --pink:        #F472B6;
+
+  --text:        #F0F0FF;
+  --text-muted:  #8888AA;
+  --text-dim:    #4444AA;
+
+  --font-head:   'Outfit', sans-serif;
+  --font-body:   'Inter', sans-serif;
+
+  --radius-sm:   0.8rem;
+  --radius-md:   1.6rem;
+  --radius-lg:   2.4rem;
+  --radius-xl:   3.2rem;
+  --radius-full: 9999px;
+
+  --transition:  all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-cyan: 0 0 30px rgba(0, 212, 255, 0.25);
+  --shadow-purple: 0 0 30px rgba(168, 85, 247, 0.25);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--cyan), var(--purple));
+  border-radius: var(--radius-full);
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: var(--cyan-dim);
+  color: var(--cyan);
+}
+
+/* ---------- Typography Utilities ---------- */
+.gradient-text {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-heading {
+  font-family: var(--font-head);
+  font-size: clamp(3.2rem, 5vw, 5.6rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 6rem;
+  position: relative;
+}
+
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 6rem;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  border-radius: var(--radius-full);
+  margin: 1.6rem auto 0;
+}
+
+/* ---------- Global Section ---------- */
+section {
+  padding: 10rem 8%;
+  position: relative;
+}
+
+/* ---------- Button ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem 3.2rem;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  border-radius: var(--radius-full);
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--bg);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-cyan); }
+.btn-primary span { position: relative; z-index: 1; }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem 3.2rem;
+  border: 2px solid var(--cyan);
+  border-radius: var(--radius-full);
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--cyan);
+  cursor: pointer;
+  transition: var(--transition);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--cyan-dim);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-cyan);
+}
+
+/* ---------- Noise Texture Overlay ---------- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  html { font-size: 55%; }
+  section { padding: 8rem 5%; }
+  .section-heading { margin-bottom: 4rem; }
+}
+
+@media (max-width: 480px) {
+  html { font-size: 50%; }
+  section { padding: 6rem 4%; }
+}

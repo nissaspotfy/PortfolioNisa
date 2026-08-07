@@ -1,0 +1,153 @@
+.section {
+  background: var(--bg-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.bgAccent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.heading {
+  position: relative;
+  z-index: 1;
+}
+
+/* Timeline container */
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+/* Center vertical line */
+.line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, var(--cyan), var(--purple), transparent);
+}
+
+/* Timeline Items */
+.item {
+  position: relative;
+  width: 48%;
+  margin-bottom: 5rem;
+}
+
+.item:last-child { margin-bottom: 0; }
+
+.itemLeft  { margin-right: auto; padding-right: 3rem; }
+.itemRight { margin-left:  auto; padding-left:  3rem; }
+
+/* Center dot */
+.dot {
+  position: absolute;
+  top: 2rem;
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  z-index: 2;
+}
+
+.itemLeft  .dot { right: -5.6rem; }
+.itemRight .dot { left:  -5.6rem; }
+
+/* Card */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 3rem;
+  backdrop-filter: blur(8px);
+  transition: var(--transition);
+  position: relative;
+}
+
+.card:hover {
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
+  transform: translateY(-4px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.period {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gpaBadge {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.3rem 1rem;
+  border-radius: var(--radius-full);
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--purple);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.school {
+  font-family: var(--font-head);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.degree {
+  font-family: var(--font-head);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--purple);
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .line { left: 1.8rem; }
+
+  .item {
+    width: 100%;
+    padding-left: 5rem !important;
+    padding-right: 0 !important;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .itemLeft .dot,
+  .itemRight .dot {
+    left: 0;
+    right: auto;
+    top: 2rem;
+  }
+}
