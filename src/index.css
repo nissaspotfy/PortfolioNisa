@@ -90,7 +90,7 @@ body {
   font-size: clamp(3.2rem, 5vw, 5.6rem);
   font-weight: 800;
   text-align: center;
-  margin-bottom: 6rem;
+  margin-bottom: 3.6rem;
   position: relative;
 }
 
@@ -101,12 +101,12 @@ body {
   height: 4px;
   background: linear-gradient(90deg, var(--cyan), var(--purple));
   border-radius: var(--radius-full);
-  margin: 1.6rem auto 0;
+  margin: 1.2rem auto 0;
 }
 
 /* ---------- Global Section ---------- */
 section {
-  padding: 10rem 8%;
+  padding: 5.5rem 8%;
   position: relative;
 }
 

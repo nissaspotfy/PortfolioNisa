@@ -54,9 +54,7 @@ export default function Education() {
                 </div>
 
                 <h3 className={styles.school}>{item.institution}</h3>
-                <p className={styles.degree}>
-                  {item.degree} • <HiOutlineLocationMarker size={13} /> {item.location}
-                </p>
+                <p className={styles.degree}>{item.degree}</p>
               </div>
             </motion.div>
           );

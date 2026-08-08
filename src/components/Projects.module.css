@@ -181,90 +181,152 @@
   gap: 0.4rem;
 }
 
-/* ISBN Badge */
+/* Interactive ISBN Badge */
 .isbnBadge {
   font-family: var(--font-head);
   font-size: 1.35rem;
   font-weight: 600;
   color: var(--text);
-  background: rgba(168, 85, 247, 0.15);
+  background: rgba(168, 85, 247, 0.12);
   border: 1px solid rgba(168, 85, 247, 0.3);
   padding: 0.8rem 1.6rem;
   border-radius: var(--radius-md);
   margin-bottom: 1.6rem;
   width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+  position: relative;
 }
 
-.isbnBadge span {
+.isbnBadge:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.15);
+}
+
+.isbnText strong {
   font-weight: 800;
   color: var(--cyan);
 }
 
-.techTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-bottom: 2.4rem;
-  margin-top: auto;
+.copyHoverTag {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.3s ease;
 }
 
-.techTag {
-  font-family: var(--font-head);
-  font-size: 1.2rem;
-  font-weight: 600;
-  padding: 0.4rem 1.2rem;
-  border-radius: var(--radius-full);
-  background: var(--cyan-dim);
+.isbnBadge:hover .copyHoverTag,
+.isbnBadgeCopied .copyHoverTag {
+  opacity: 1;
+  max-width: 120px;
   color: var(--cyan);
-  border: 1px solid rgba(0, 212, 255, 0.15);
+  background: rgba(0, 212, 255, 0.15);
+}
+
+.isbnBadgeCopied {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+.isbnBadgeCopied .copyHoverTag {
+  color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.2) !important;
 }
 
 /* Action Row */
 .actionRow {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  justify-content: space-between;
+  gap: 1rem;
   flex-wrap: wrap;
   padding-top: 1.6rem;
+  margin-top: auto;
   border-top: 1px solid var(--border);
 }
 
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.techTag {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+/* Buy Book Button - Solid to Outline on Hover */
 .storeBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 1rem 2rem;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
   background: linear-gradient(135deg, var(--cyan), var(--purple));
+  border: 1px solid transparent;
   border-radius: var(--radius-full);
   font-family: var(--font-head);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--bg);
   transition: var(--transition);
+  white-space: nowrap;
 }
 
 .storeBtn:hover {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(168, 85, 247, 0.2));
+  border-color: var(--cyan);
+  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3);
 }
 
+/* Check ISBN Button - Outline to Solid on Hover (Pushed to Right) */
 .isbnBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(0, 212, 255, 0.3));
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(0, 212, 255, 0.2));
   border: 1px solid var(--purple);
   border-radius: var(--radius-full);
   font-family: var(--font-head);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: white;
   transition: var(--transition);
+  white-space: nowrap;
+  margin-left: auto;
 }
 
 .isbnBtn:hover {
   background: linear-gradient(135deg, var(--purple), var(--cyan));
+  border-color: transparent;
   color: var(--bg);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
@@ -328,6 +390,56 @@
 .demoBtn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+}
+
+.readyBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px dashed rgba(0, 212, 255, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--cyan);
+}
+
+.upcomingBadge {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-full);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.demoBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+}
+
+.readyBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px dashed rgba(0, 212, 255, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--cyan);
 }
 
 .upcomingBadge {

@@ -172,16 +172,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Scroll hint */}
-      <motion.div
-        className={styles.scrollHint}
-        animate={{ y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-      >
-        <div className={styles.scrollLine} />
-        <span>Scroll</span>
-      </motion.div>
     </section>
   );
 }

@@ -1,7 +1,15 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { projectExperiences } from '../data/portfolioData';
-import { HiOutlineCode, HiOutlineCalendar, HiOutlineLocationMarker, HiOutlineExternalLink, HiOutlineBookOpen } from 'react-icons/hi';
-import { FaGithub } from 'react-icons/fa';
+import {
+  HiOutlineCode,
+  HiOutlineCalendar,
+  HiOutlineLocationMarker,
+  HiOutlineExternalLink,
+  HiOutlineBookOpen,
+  HiOutlineClipboardCopy,
+  HiOutlineCheck,
+} from 'react-icons/hi';
 import styles from './Projects.module.css';
 
 const container = {
@@ -15,6 +23,14 @@ const cardVariant = {
 };
 
 export default function Projects() {
+  const [copiedId, setCopiedId] = useState(null);
+
+  const handleCopyIsbn = (id, isbn) => {
+    navigator.clipboard.writeText(isbn);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
   return (
     <section className={styles.section} id="projects">
       <div className={styles.bgOrb} aria-hidden />
@@ -86,25 +102,34 @@ export default function Projects() {
 
             <div className={styles.cardContent}>
               <h3 className={styles.title}>{project.title}</h3>
-              <p className={styles.institution}>
-                {project.institution} • <HiOutlineLocationMarker size={13} /> {project.location}
-              </p>
+              <p className={styles.institution}>{project.institution}</p>
 
+              {/* Interactive Copyable ISBN Badge */}
               {project.isbn && (
-                <div className={styles.isbnBadge}>
-                  📚 ISBN: <span>{project.isbn}</span>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopyIsbn(project.id, project.isbn)}
+                  className={`${styles.isbnBadge} ${copiedId === project.id ? styles.isbnBadgeCopied : ''}`}
+                  title="Copy ISBN"
+                >
+                  <span className={styles.isbnText}>
+                    📚 ISBN: <strong>{project.isbn}</strong>
+                  </span>
+                  <span className={styles.copyHoverTag}>
+                    {copiedId === project.id ? (
+                      <>
+                        <HiOutlineCheck size={14} color="#10b981" /> Copied!
+                      </>
+                    ) : (
+                      <>
+                        <HiOutlineClipboardCopy size={14} /> Copy ISBN
+                      </>
+                    )}
+                  </span>
+                </button>
               )}
 
-              <div className={styles.techTags}>
-                {project.tech.map((t, idx) => (
-                  <span key={idx} className={styles.techTag}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              {/* Action Buttons (GitHub / Demo / ISBN Perpusnas / Inkara Store) */}
+              {/* Action Buttons (Buy Book / Check ISBN / View SRS Document / Live Demo / Deployment Ready) */}
               <div className={styles.actionRow}>
                 {project.storeUrl && (
                   <a
@@ -113,8 +138,8 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     className={styles.storeBtn}
                   >
-                    <span>Buy / View Book on Inkara Store</span>
-                    <HiOutlineExternalLink size={16} />
+                    <span>Buy Book on Inkara</span>
+                    <HiOutlineExternalLink size={15} />
                   </a>
                 )}
 
@@ -125,8 +150,8 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     className={styles.isbnBtn}
                   >
-                    <span>Check ISBN on Perpusnas</span>
-                    <HiOutlineExternalLink size={16} />
+                    <span>Check ISBN (Perpusnas)</span>
+                    <HiOutlineExternalLink size={15} />
                   </a>
                 )}
 
@@ -138,23 +163,11 @@ export default function Projects() {
                     className={styles.srsBtn}
                   >
                     <span>View SRS Document (PDF)</span>
-                    <HiOutlineExternalLink size={16} />
+                    <HiOutlineExternalLink size={15} />
                   </a>
                 )}
 
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.githubBtn}
-                  >
-                    <FaGithub size={16} />
-                    <span>View GitHub Repo</span>
-                  </a>
-                )}
-
-                {project.demoUrl && (
+                {project.demoUrl ? (
                   <a
                     href={project.demoUrl}
                     target="_blank"
@@ -162,9 +175,22 @@ export default function Projects() {
                     className={styles.demoBtn}
                   >
                     <span>Live Demo</span>
-                    <HiOutlineExternalLink size={16} />
+                    <HiOutlineExternalLink size={15} />
                   </a>
-                )}
+                ) : (!project.isTextbook && !project.srsUrl) ? (
+                  <span className={styles.readyBadge}>
+                    🚀 Deployment Ready
+                  </span>
+                ) : null}
+              </div>
+
+              {/* Tech Tags at the bottom */}
+              <div className={styles.techTags}>
+                {project.tech.map((t, idx) => (
+                  <span key={idx} className={styles.techTag}>
+                    {t}
+                  </span>
+                ))}
               </div>
             </div>
           </motion.div>

@@ -206,25 +206,36 @@ export const education = [
 ];
 
 export const skills = {
-  hardSkills: [
-    { name: 'React.js', level: 'Advanced' },
-    { name: 'JavaScript', level: 'Intermediate' },
-    { name: 'Express.js', level: 'Intermediate' },
-    { name: 'Laravel', level: 'Intermediate' },
-    { name: 'PHP', level: 'Intermediate' },
-    { name: 'HTML & CSS', level: 'Intermediate' },
-    { name: 'Java', level: 'Beginner' },
-    { name: 'UI/UX (Figma, Canva)', level: 'Advanced' },
-    { name: 'Voice Over & Video Editing', level: 'Advanced' },
-    { name: 'System Analysis & UML', level: 'Advanced' },
+  row1: [
+    { name: 'HTML5', icon: 'html' },
+    { name: 'CSS3', icon: 'css' },
+    { name: 'Vite', icon: 'vite' },
+    { name: 'Node.js', icon: 'node' },
+    { name: 'Express.js', icon: 'express' },
+    { name: 'Next.js', icon: 'next' },
+    { name: 'React', icon: 'react' },
+    { name: 'JavaScript', icon: 'js' },
+    { name: 'Tailwind CSS', icon: 'tailwind' },
+  ],
+  row2: [
+    { name: 'GitHub', icon: 'github' },
+    { name: 'Postman', icon: 'postman' },
+    { name: 'Figma', icon: 'figma' },
+    { name: 'VS Code', icon: 'vscode' },
+    { name: 'Kotlin', icon: 'kotlin' },
+    { name: 'Laravel', icon: 'laravel' },
+    { name: 'PHP', icon: 'php' },
+    { name: 'Java', icon: 'java' },
+    { name: 'MySQL', icon: 'mysql' },
+    { name: 'UML & System Analysis', icon: 'uml' },
   ],
   softSkills: [
-    'Problem Solving',
-    'Teamwork',
-    'Creative Communication',
-    'Growth Mindset',
-    'Leadership',
-    'Public Speaking',
+    { name: 'Problem Solving', icon: '🧠' },
+    { name: 'Teamwork & Collaboration', icon: '🤝' },
+    { name: 'Creative Communication', icon: '💬' },
+    { name: 'Growth Mindset', icon: '🌱' },
+    { name: 'Leadership', icon: '👑' },
+    { name: 'Public Speaking', icon: '🎙️' },
   ],
   achievements: [
     {

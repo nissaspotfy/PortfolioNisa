@@ -2,6 +2,7 @@
   background: var(--bg-2);
   position: relative;
   overflow: hidden;
+  padding: 6rem 0;
 }
 
 .bgOrb {
@@ -15,130 +16,234 @@
   pointer-events: none;
 }
 
-.heading { position: relative; z-index: 1; }
+.heading {
+  position: relative;
+  z-index: 1;
+  padding: 0 8%;
+}
 
-.layout {
+/* 🚀 Marquee Wrapper & Gradient Fades */
+.marqueeWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding: 1rem 0;
+}
+
+.fadeLeft, .fadeRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.fadeLeft {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-2) 0%, transparent 100%);
+}
+
+.fadeRight {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-2) 0%, transparent 100%);
+}
+
+.marqueeRow {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Marquee Animations */
+.trackLeft {
+  animation: marqueeLeft 35s linear infinite;
+}
+
+.trackRight {
+  animation: marqueeRight 35s linear infinite;
+}
+
+.marqueeWrapper:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+/* Tech Pill Card */
+.techPill {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 2.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.techPill:hover {
+  background: rgba(0, 212, 255, 0.12);
+  border-color: var(--cyan);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.25);
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.techLabel {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* 🎯 Bottom Grid (Soft Skills & Achievements) */
+.bottomGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3.2rem;
+  gap: 2.8rem;
   position: relative;
   z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 8%;
+  align-items: stretch;
 }
 
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 3.2rem;
-}
-
-.block {
+.softBlock, .achieveBlock {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  padding: 3.2rem;
+  padding: 3rem;
   backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.softBlock:hover, .achieveBlock:hover {
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.blockHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-bottom: 2.4rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .blockTitle {
   font-family: var(--font-head);
   font-size: 2rem;
   font-weight: 800;
-  color: var(--text);
-  margin-bottom: 2.4rem;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.blockSub {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+.iconPurple { color: var(--purple-light); }
+.iconGold { color: #F59E0B; }
+
+/* Soft Skills Grid */
+.softGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+}
+
+.softCard {
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1.8rem;
   display: flex;
   align-items: center;
   gap: 1.2rem;
-}
-
-.iconCyan { color: var(--cyan); }
-.iconPurple { color: var(--purple); }
-.iconGold { color: #F59E0B; }
-
-/* Skill Grid */
-.skillGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 1.6rem;
-}
-
-.skillCard {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 1.6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
   transition: var(--transition);
 }
 
-.skillCard:hover {
-  border-color: rgba(0, 212, 255, 0.3);
-  background: var(--cyan-dim);
-  transform: translateY(-3px);
+.softCard:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--purple-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
 }
 
-.skillName {
-  font-family: var(--font-head);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
+.softEmoji {
+  font-size: 1.8rem;
+  flex-shrink: 0;
 }
 
-.skillLevel {
-  font-size: 1.2rem;
-  color: var(--cyan);
-  font-weight: 500;
-}
-
-/* Soft Pills */
-.softPills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.softPill {
+.softText {
   font-family: var(--font-head);
   font-size: 1.4rem;
-  font-weight: 600;
-  padding: 0.8rem 1.8rem;
-  border-radius: var(--radius-full);
-  background: var(--purple-dim);
-  color: var(--purple);
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  transition: var(--transition);
+  font-weight: 700;
+  color: #ffffff;
 }
 
-.softPill:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
-}
-
-/* Achievements */
-.achievementList {
+/* Achieve List */
+.achieveList {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 1.4rem;
 }
 
-.achievementCard {
+.achieveCard {
   display: flex;
   align-items: center;
   gap: 1.6rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
+  background: rgba(245, 158, 11, 0.05);
+  border: 1px solid rgba(245, 158, 11, 0.2);
   border-radius: var(--radius-lg);
-  padding: 1.8rem 2rem;
+  padding: 1.6rem 2rem;
   transition: var(--transition);
 }
 
-.achievementCard:hover {
-  border-color: rgba(245, 158, 11, 0.4);
+.achieveCard:hover {
+  border-color: rgba(245, 158, 11, 0.5);
   transform: translateX(6px);
-  background: rgba(245, 158, 11, 0.05);
+  background: rgba(245, 158, 11, 0.1);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.15);
 }
 
 .trophyIcon {
@@ -146,16 +251,32 @@
   flex-shrink: 0;
 }
 
-.achievementTitle {
+.achieveDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.achieveTitle {
   font-family: var(--font-head);
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 700;
-  color: var(--text);
-  line-height: 1.4;
+  color: #ffffff;
+  line-height: 1.35;
+}
+
+.achieveYear {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #F59E0B;
 }
 
 @media (max-width: 900px) {
-  .layout {
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .softGrid {
     grid-template-columns: 1fr;
   }
 }
