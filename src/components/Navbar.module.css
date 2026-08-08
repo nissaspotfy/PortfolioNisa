@@ -70,6 +70,36 @@
   display: none;
 }
 
+/* Header Actions (Theme Toggle & Hire Me) */
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.themeToggleBtn {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+  flex-shrink: 0;
+}
+
+.themeToggleBtn:hover {
+  background: var(--cyan-dim);
+  border-color: var(--cyan);
+  transform: rotate(15deg) scale(1.08);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
 /* Hire Button */
 .hireBtn {
   display: inline-flex;
@@ -146,13 +176,36 @@
   background: var(--cyan-dim);
 }
 
+.mobileHireBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.1rem 1.6rem;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  border-radius: var(--radius-md);
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bg);
+  margin-top: 0.6rem;
+  transition: var(--transition);
+}
+
+.mobileHireBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
-  .nav, .hireBtn { display: none; }
+  .nav { display: none; }
+  .hireBtn { display: none; }
   .hamburger { display: flex; }
+  .headerActions { gap: 0.8rem; }
 }
 
 @media (max-width: 480px) {
-  .header { padding: 1.6rem 5%; }
-  .logo { font-size: 1.8rem; }
+  .header { padding: 1.4rem 5%; }
+  .logo { font-size: 1.7rem; }
+  .themeToggleBtn { width: 3.6rem; height: 3.6rem; }
 }

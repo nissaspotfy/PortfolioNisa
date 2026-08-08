@@ -1,13 +1,23 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi';
 import { personalDetails, navLinks, hireMailtoUrl } from '../data/portfolioData';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
-  const [activeId, setActiveId]   = useState('home');
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeId, setActiveId] = useState('home');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -56,13 +66,25 @@ export default function Navbar() {
         ))}
       </nav>
 
-      {/* Hire Button */}
-      <a
-        href={hireMailtoUrl}
-        className={styles.hireBtn}
-      >
-        <span>Hire Me</span>
-      </a>
+      {/* Actions Group: Theme Toggle & Hire Button */}
+      <div className={styles.headerActions}>
+        <button
+          type="button"
+          className={styles.themeToggleBtn}
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        >
+          {theme === 'dark' ? <FiSun size={18} /> : <FiMoon size={18} />}
+        </button>
+
+        <a
+          href={hireMailtoUrl}
+          className={styles.hireBtn}
+        >
+          <span>Hire Me</span>
+        </a>
+      </div>
 
       {/* Hamburger */}
       <button
@@ -97,6 +119,16 @@ export default function Navbar() {
                 {link.label}
               </motion.a>
             ))}
+
+            <motion.a
+              href={hireMailtoUrl}
+              className={styles.mobileHireBtn}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: navLinks.length * 0.06 }}
+            >
+              <span>Hire Me</span>
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
