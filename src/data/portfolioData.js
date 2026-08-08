@@ -240,11 +240,11 @@ export const skills = {
   achievements: [
     {
       title: '1st Winner — Departmental Creative Video Competition',
-      year: '2020',
+      year: '2026',
     },
     {
       title: '7th Place & National Finalist — National UI/UX Design Competition',
-      year: '2023',
+      year: '2025',
     },
   ],
 };
