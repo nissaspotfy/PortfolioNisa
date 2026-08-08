@@ -14,6 +14,13 @@ export const personalDetails = {
     'A motivated and detail-oriented Fresh Graduate from Universitas Pasundan with a strong passion for Web Development. Proficient in Laravel, JavaScript, React, and Express.js, with hands-on experience developing web applications. Eager to leverage technical expertise and problem-solving skills to contribute meaningfully to innovative software projects.',
 };
 
+const emailSubject = encodeURIComponent('Job Opportunity & Recruitment Inquiry — Anissa Nursafitri');
+const emailBody = encodeURIComponent(
+  `Dear Anissa Nursafitri,\n\nI reviewed your portfolio website and was impressed by your technical expertise in software development and system analysis.\n\nWe would like to invite you for an introductory discussion regarding potential career opportunities at our organization:\n\n• Company / Organization: \n• Position / Role: \n• Work Model (Remote / Hybrid / Onsite): \n\nPlease let us know your available dates and time for an introductory call.\n\nBest regards,\n[Your Name / Hiring Manager]\n[Contact Information]`
+);
+
+export const hireMailtoUrl = `mailto:${personalDetails.email}?subject=${emailSubject}&body=${emailBody}`;
+
 export const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'Projects', href: '#projects' },

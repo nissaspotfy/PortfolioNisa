@@ -5,7 +5,7 @@ import {
 } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import { BsArrowUpRight } from 'react-icons/bs';
-import { typingWords, personalDetails } from '../data/portfolioData';
+import { typingWords, personalDetails, hireMailtoUrl } from '../data/portfolioData';
 import styles from './Hero.module.css';
 
 /* ---- Typing Hook ---- */
@@ -118,7 +118,7 @@ export default function Hero() {
 
           <motion.div className={styles.actions} variants={fadeUp}>
             <a
-              href="mailto:anissanursafitri532@gmail.com?subject=Job%20Opportunity%20-%20Anissa%20Nursafitri"
+              href={hireMailtoUrl}
               className={styles.btnPrimary}
               id="hire-btn"
             >

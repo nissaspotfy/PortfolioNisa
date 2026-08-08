@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
-import { navLinks } from '../data/portfolioData';
+import { personalDetails, navLinks, hireMailtoUrl } from '../data/portfolioData';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -58,7 +58,7 @@ export default function Navbar() {
 
       {/* Hire Button */}
       <a
-        href="mailto:anissanursafitri532@gmail.com?subject=Job%20Opportunity%20-%20Anissa%20Nursafitri"
+        href={hireMailtoUrl}
         className={styles.hireBtn}
       >
         <span>Hire Me</span>
