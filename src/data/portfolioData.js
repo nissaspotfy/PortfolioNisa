@@ -194,58 +194,61 @@ export const projectExperiences = [
   },
 ];
 
-export const organisationalExperiences = [
+export const professionalExperiences = [
   {
     id: 1,
-    role: 'Secretary',
-    organization: 'Google Developer Group on Campus Universitas Pasundan',
+    role: 'Teaching Laboratory Assistant for Object-Oriented Systems',
+    organization: 'Informatics Engineering Laboratory — Universitas Pasundan',
     location: 'Bandung',
-    period: 'Jan 2024 – Feb 2025',
-    points: [
-      'Managed end-to-end organizational administration, official documentation, and internal correspondence for the GDGoC community.',
-      'Coordinated tech events, workshops, and developer initiatives to foster technology education and skill-building on campus.',
-      'Facilitated cross-team collaboration and maintained relationships with external partners and sponsors.',
-    ],
+    period: 'Oct 2025 – Jan 2026',
+    image: '/img/asisten.jpeg',
+    note: 'Served as a Laboratory Teaching Assistant for Object-Oriented Systems, guiding students through practical Object-Oriented Programming (OOP) principles, Java development, UML system modeling, code reviews, and laboratory practicum evaluations.',
+    tags: ['OOP (Object-Oriented Programming)', 'Java', 'UML Modeling', 'Lab Practicum', 'Mentorship'],
   },
   {
     id: 2,
-    role: 'Secretary of PSDM Department',
-    organization: 'Informatics Engineering Student Association',
+    role: 'Secretary',
+    organization: 'Google Developer Group on Campus Universitas Pasundan',
     location: 'Bandung',
-    period: 'Oct 2024 – Feb 2025',
-    points: [
-      'Handled departmental administration and progress tracking for Human Resource Development (PSDM) initiatives.',
-      'Spearheaded member development programs, including structured recruitment, technical bootcamps, and leadership workshops.',
-      'Established mentoring systems and performance evaluation frameworks to improve organizational capabilities.',
-    ],
+    period: 'Nov 2024 – Apr 2025',
+    image: '/img/gdgoc.jpeg',
+    note: 'Managed end-to-end organizational administration, official documentation, and internal correspondence for GDGoC UNPAS. Coordinated tech events, hands-on workshops, and developer initiatives to foster technology education and digital skill-building across campus.',
+    tags: ['GDGoC Leadership', 'Event Administration', 'Developer Community', 'Partnership'],
   },
   {
     id: 3,
+    role: 'Secretary of PSDM Department',
+    organization: 'Informatics Engineering Student Association (HIMAIF)',
+    location: 'Bandung',
+    period: 'Oct 2024 – Feb 2025',
+    image: '/img/webinar inspiratif.png',
+    note: 'Administered departmental operations for Human Resource Development (PSDM). Spearheaded member development initiatives, including structured recruitment drives, technical bootcamps, leadership workshops, and peer mentorship programs.',
+    tags: ['HRD & PSDM', 'Member Development', 'Technical Bootcamp', 'Leadership System'],
+  },
+  {
+    id: 4,
     role: 'Event Manager',
     organization: 'Google Developer Student Club Universitas Pasundan',
     location: 'Bandung',
     period: 'Aug 2023 – Jun 2024',
-    points: [
-      'Planned and executed large-scale tech events, including hands-on workshops, seminars, and Google Study Jams.',
-      'Managed end-to-end event logistics, speaker coordination, and timeline execution to ensure seamless delivery.',
-      'Drove participant outreach and engagement, attracting attendees both from within and outside the university.',
-    ],
+    image: '/img/gdsc.jpeg',
+    note: 'Planned and executed large-scale tech events, including hands-on workshops, IT seminars, and Google Study Jams. Led event logistics, speaker management, and audience outreach strategies to maximize participant engagement both on and off campus.',
+    tags: ['Event Management', 'Google Study Jams', 'Tech Workshop', 'Public Relations'],
   },
   {
-    id: 4,
+    id: 5,
     role: 'Publication, Design & Documentation Staff',
-    organization: 'Informatics Department Orientation Committee',
+    organization: 'PKKMB 2023',
     location: 'Bandung',
-    period: 'Nov 2023 – Feb 2024',
-    points: [
-      'Designed creative promotional assets, social media graphics, and visual branding for the orientation series.',
-      'Managed content distribution strategies across digital channels to boost participant awareness and engagement.',
-      'Documented official orientation activities and managed multimedia archives for committee publications.',
-    ],
+    period: 'Sep 2023 – Dec 2023',
+    image: '/img/pekan_it_2025.jpg',
+    note: 'Designed creative promotional assets, visual branding, and social media graphics for the informatics orientation series. Managed official photo/video documentation and curated multimedia archives for committee publications.',
+    tags: ['Graphic Design', 'Visual Branding', 'Event Documentation', 'Social Media'],
   },
 ];
 
-export const experience = organisationalExperiences;
+export const organisationalExperiences = professionalExperiences;
+export const experience = professionalExperiences;
 
 export const education = [
   {
