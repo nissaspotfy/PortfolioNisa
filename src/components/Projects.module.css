@@ -442,15 +442,56 @@
   color: var(--cyan);
 }
 
-.upcomingBadge {
+.headerTags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.categoryTag {
   font-family: var(--font-head);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.04);
-  padding: 0.6rem 1.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--purple-dim);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  letter-spacing: 0.03em;
+}
+
+.loadMoreWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 4.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.loadMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.4rem 3.6rem;
+  background: var(--surface);
+  border: 1.5px solid var(--cyan);
   border-radius: var(--radius-full);
-  border: 1px dashed rgba(255, 255, 255, 0.15);
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cyan);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.loadMoreBtn:hover {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  color: var(--bg);
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px var(--shadow-cyan);
 }
 
 @media (max-width: 768px) {
