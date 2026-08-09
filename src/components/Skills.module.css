@@ -97,8 +97,8 @@
   align-items: center;
   gap: 1.2rem;
   padding: 1.2rem 2.2rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-full);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
@@ -107,7 +107,7 @@
 }
 
 .techPill:hover {
-  background: rgba(0, 212, 255, 0.12);
+  background: var(--cyan-dim);
   border-color: var(--cyan);
   transform: translateY(-3px) scale(1.03);
   box-shadow: 0 8px 25px rgba(0, 212, 255, 0.25);
@@ -124,7 +124,7 @@
   font-family: var(--font-head);
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text);
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
@@ -155,7 +155,7 @@
 
 .softBlock:hover, .achieveBlock:hover {
   border-color: rgba(0, 212, 255, 0.3);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .blockHeader {
@@ -171,7 +171,7 @@
   font-family: var(--font-head);
   font-size: 2rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text);
   line-height: 1.2;
 }
 
@@ -192,7 +192,7 @@
 }
 
 .softCard {
-  background: rgba(168, 85, 247, 0.08);
+  background: var(--purple-dim);
   border: 1px solid rgba(168, 85, 247, 0.25);
   border-radius: var(--radius-md);
   padding: 1.4rem 1.8rem;
@@ -218,7 +218,7 @@
   font-family: var(--font-head);
   font-size: 1.4rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text);
 }
 
 /* Achieve List */
@@ -232,8 +232,8 @@
   display: flex;
   align-items: center;
   gap: 1.6rem;
-  background: rgba(245, 158, 11, 0.05);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.07);
+  border: 1px solid rgba(245, 158, 11, 0.25);
   border-radius: var(--radius-lg);
   padding: 1.6rem 2rem;
   transition: var(--transition);
@@ -242,7 +242,7 @@
 .achieveCard:hover {
   border-color: rgba(245, 158, 11, 0.5);
   transform: translateX(6px);
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(245, 158, 11, 0.12);
   box-shadow: 0 6px 20px rgba(245, 158, 11, 0.15);
 }
 
@@ -261,7 +261,7 @@
   font-family: var(--font-head);
   font-size: 1.45rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text);
   line-height: 1.35;
 }
 

@@ -12,6 +12,7 @@
   --surface:     rgba(255, 255, 255, 0.03);
   --glass:       rgba(255, 255, 255, 0.05);
   --border:      rgba(255, 255, 255, 0.08);
+  --nav-bg:      rgba(5, 5, 16, 0.85);
 
   --cyan:        #00D4FF;
   --cyan-dim:    rgba(0, 212, 255, 0.15);
@@ -44,14 +45,15 @@
   --bg-2:        #f1f5f9;
   --bg-3:        #e2e8f0;
   --surface:     #ffffff;
-  --glass:       rgba(0, 0, 0, 0.03);
+  --glass:       rgba(0, 0, 0, 0.04);
   --border:      rgba(0, 0, 0, 0.1);
+  --nav-bg:      rgba(255, 255, 255, 0.88);
 
   --cyan:        #0284c7;
-  --cyan-dim:    rgba(2, 132, 199, 0.1);
+  --cyan-dim:    rgba(2, 132, 199, 0.12);
   --cyan-glow:   rgba(2, 132, 199, 0.3);
   --purple:      #9333ea;
-  --purple-dim:  rgba(147, 51, 234, 0.1);
+  --purple-dim:  rgba(147, 51, 234, 0.12);
   --purple-glow: rgba(147, 51, 234, 0.3);
   --pink:        #db2777;
 

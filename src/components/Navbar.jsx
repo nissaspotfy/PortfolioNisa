@@ -13,6 +13,16 @@ export default function Navbar() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
+    window.dispatchEvent(new Event('themechange'));
+  }, [theme]);
+
+  useEffect(() => {
+    const handleSync = () => {
+      const current = localStorage.getItem('theme') || 'dark';
+      if (current !== theme) setTheme(current);
+    };
+    window.addEventListener('themechange', handleSync);
+    return () => window.removeEventListener('themechange', handleSync);
   }, [theme]);
 
   const toggleTheme = () => {
