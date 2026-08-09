@@ -340,13 +340,21 @@ export const certificates = [
   {
     id: 2,
     title: 'National UI/UX Design Finalist & Participant — Pekan IT 2025',
-    issuer: 'HIMAIF Universitas Pasundan',
-    date: '2025',
+    issuer: 'HIMTIKA UNSIKA (Informatics Engineering Student Association)',
+    date: 'September 2025',
     image: '/img/pekan_it_2025.jpg',
-    description: 'Official Certificate of Achievement & Participation as a National Finalist in the Pekan IT 2025 UI/UX Design Competition.',
+    description: 'Official Certificate of Achievement & Participation as a National Finalist in the Pekan IT 2025 UI/UX Design Competition organized by HIMTIKA Universitas Singaperbangsa Karawang.',
   },
   {
     id: 3,
+    title: '1st Winner — Departmental Creative Video Competition',
+    issuer: 'Informatics Engineering Student Association',
+    date: '2026',
+    image: '/img/techtok.jpg',
+    description: 'Official Certificate presented for 1st Place Winner in Departmental Creative Video Competition organized by Informatics Engineering Student Association.',
+  },
+  {
+    id: 4,
     title: 'GDSC Core Member Certificate (2023–2024)',
     issuer: 'Google Developer Student Clubs UNPAS',
     date: '2023 – 2024',
@@ -354,7 +362,7 @@ export const certificates = [
     description: 'Official certificate of appreciation presented for valuable contribution and leadership as a Core Member of Google Developer Student Clubs Universitas Pasundan.',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Wadhwani Foundation — Entrepreneurship Certificate',
     issuer: 'Wadhwani Foundation',
     date: 'December 2025',
@@ -362,7 +370,7 @@ export const certificates = [
     description: 'Certificate of completion for Entrepreneurship Education by Wadhwani Foundation, cultivating skills in venture creation, business innovation, and strategic thinking.',
   },
   {
-    id: 5,
+    id: 6,
     title: 'National Creative Video Competition',
     issuer: 'Muhammadiyah University Malang',
     date: 'August 2020',
@@ -370,7 +378,7 @@ export const certificates = [
     description: 'Certificate of the national creative video competition at the Millad event of Muhammadiyah University.',
   },
   {
-    id: 6,
+    id: 7,
     title: 'National Creative Video Competition',
     issuer: 'Bakrie University',
     date: 'August 2020',
@@ -378,7 +386,7 @@ export const certificates = [
     description: 'Certificate of national creative video competition organized by Bakrie University.',
   },
   {
-    id: 7,
+    id: 8,
     title: 'National Creative Video Competition',
     issuer: 'Pasar Rebo Nursing Academy',
     date: 'March 2021',
@@ -386,7 +394,7 @@ export const certificates = [
     description: 'Certificate of the national creative video competition organized by the student senate of Pasar Rebo Nursing Academy.',
   },
   {
-    id: 8,
+    id: 9,
     title: 'Basic Java Programming',
     issuer: 'Sololearn',
     date: 'June 2023',
@@ -394,7 +402,7 @@ export const certificates = [
     description: 'Certificate of learning basic Java programming organized by Sololearn.',
   },
   {
-    id: 9,
+    id: 10,
     title: 'Basic Project Management',
     issuer: 'Dicoding',
     date: 'August 2023',
@@ -402,7 +410,7 @@ export const certificates = [
     description: 'Basic project management learning certificate organized by Dicoding.',
   },
   {
-    id: 10,
+    id: 11,
     title: 'National Singing Competition',
     issuer: 'Prisma Got Talent',
     date: 'August 2020',
@@ -410,7 +418,7 @@ export const certificates = [
     description: 'Certificate of the national singing competition organized by Prisma Got Talent.',
   },
   {
-    id: 11,
+    id: 12,
     title: 'Pasanggiri Sunda Competition',
     issuer: 'Sukabumi City Government',
     date: 'April 2021',
@@ -418,7 +426,7 @@ export const certificates = [
     description: 'Certificate of the pasanggiri sunda competition organized by the Sukabumi City government.',
   },
   {
-    id: 12,
+    id: 13,
     title: 'National Creative Video Competition',
     issuer: 'STKIP Kusuma Negara',
     date: 'August 2020',
@@ -426,7 +434,7 @@ export const certificates = [
     description: 'Certificate of the national creative video competition organized by STKIP Kusuma Negara.',
   },
   {
-    id: 13,
+    id: 14,
     title: 'National Creative Video Competition',
     issuer: 'STH Pasundan',
     date: 'March 2022',
