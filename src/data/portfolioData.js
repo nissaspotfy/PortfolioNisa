@@ -268,6 +268,14 @@ export const certificates = [
   },
   {
     id: 2,
+    title: 'National UI/UX Design Finalist & Participant — Pekan IT 2025',
+    issuer: 'HIMAIF Universitas Pasundan',
+    date: '2025',
+    image: '/img/pekan_it_2025.jpg',
+    description: 'Official Certificate of Achievement & Participation as a National Finalist in the Pekan IT 2025 UI/UX Design Competition.',
+  },
+  {
+    id: 3,
     title: 'GDSC Core Member Certificate (2023–2024)',
     issuer: 'Google Developer Student Clubs UNPAS',
     date: '2023 – 2024',
@@ -275,7 +283,7 @@ export const certificates = [
     description: 'Official certificate of appreciation presented for valuable contribution and leadership as a Core Member of Google Developer Student Clubs Universitas Pasundan.',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Wadhwani Foundation — Entrepreneurship Certificate',
     issuer: 'Wadhwani Foundation',
     date: 'December 2025',
@@ -283,7 +291,7 @@ export const certificates = [
     description: 'Certificate of completion for Entrepreneurship Education by Wadhwani Foundation, cultivating skills in venture creation, business innovation, and strategic thinking.',
   },
   {
-    id: 4,
+    id: 5,
     title: 'National Creative Video Competition',
     issuer: 'Muhammadiyah University Malang',
     date: 'August 2020',
@@ -291,7 +299,7 @@ export const certificates = [
     description: 'Certificate of the national creative video competition at the Millad event of Muhammadiyah University.',
   },
   {
-    id: 5,
+    id: 6,
     title: 'National Creative Video Competition',
     issuer: 'Bakrie University',
     date: 'August 2020',
@@ -299,7 +307,7 @@ export const certificates = [
     description: 'Certificate of national creative video competition organized by Bakrie University.',
   },
   {
-    id: 3,
+    id: 7,
     title: 'National Creative Video Competition',
     issuer: 'Pasar Rebo Nursing Academy',
     date: 'March 2021',
@@ -307,7 +315,7 @@ export const certificates = [
     description: 'Certificate of the national creative video competition organized by the student senate of Pasar Rebo Nursing Academy.',
   },
   {
-    id: 4,
+    id: 8,
     title: 'Basic Java Programming',
     issuer: 'Sololearn',
     date: 'June 2023',
@@ -315,7 +323,7 @@ export const certificates = [
     description: 'Certificate of learning basic Java programming organized by Sololearn.',
   },
   {
-    id: 5,
+    id: 9,
     title: 'Basic Project Management',
     issuer: 'Dicoding',
     date: 'August 2023',
@@ -323,7 +331,7 @@ export const certificates = [
     description: 'Basic project management learning certificate organized by Dicoding.',
   },
   {
-    id: 6,
+    id: 10,
     title: 'National Singing Competition',
     issuer: 'Prisma Got Talent',
     date: 'August 2020',
@@ -331,7 +339,7 @@ export const certificates = [
     description: 'Certificate of the national singing competition organized by Prisma Got Talent.',
   },
   {
-    id: 7,
+    id: 11,
     title: 'Pasanggiri Sunda Competition',
     issuer: 'Sukabumi City Government',
     date: 'April 2021',
@@ -339,7 +347,7 @@ export const certificates = [
     description: 'Certificate of the pasanggiri sunda competition organized by the Sukabumi City government.',
   },
   {
-    id: 8,
+    id: 12,
     title: 'National Creative Video Competition',
     issuer: 'STKIP Kusuma Negara',
     date: 'August 2020',
@@ -347,8 +355,8 @@ export const certificates = [
     description: 'Certificate of the national creative video competition organized by STKIP Kusuma Negara.',
   },
   {
-    id: 9,
-    title: 'Creative Video Competition',
+    id: 13,
+    title: 'National Creative Video Competition',
     issuer: 'STH Pasundan',
     date: 'March 2022',
     image: '/img/sthpasundan.png',
