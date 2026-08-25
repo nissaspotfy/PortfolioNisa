@@ -11,7 +11,7 @@ export const personalDetails = {
   website: 'https://anissanursafitri.vercel.app/',
   address: 'Jl. Cijambe Pakojan Kp. Cipeundeuy RT/RW : 005/010, Kel. Sukakarya, Kec. Warudoyong, Kota Sukabumi, Jawa Barat',
   summary:
-    'A motivated and detail-oriented Fresh Graduate from Universitas Pasundan with a strong passion for Web Development. Proficient in Laravel, JavaScript, React, and Express.js, with hands-on experience developing web applications. Eager to leverage technical expertise and problem-solving skills to contribute meaningfully to innovative software projects.',
+    'A motivated and detail-oriented Fresh Graduate from Universitas Pasundan with a strong passion for Web Development and AI integration. Proficient in Laravel, JavaScript, React, and Express.js, with hands-on experience developing web applications and incorporating AI-driven features. Eager to leverage technical expertise and problem-solving skills to contribute meaningfully to innovative software projects while staying ahead in AI technology.',
 };
 
 const emailSubject = encodeURIComponent('Job Opportunity & Recruitment Inquiry — Anissa Nursafitri');
