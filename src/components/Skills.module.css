@@ -271,12 +271,262 @@
   color: #F59E0B;
 }
 
+.sectionSubtitle {
+  text-align: center;
+  font-size: clamp(1.4rem, 1.8vw, 1.65rem);
+  color: var(--text-muted);
+  max-width: 750px;
+  margin: -1.6rem auto 3.2rem;
+  padding: 0 8%;
+  line-height: 1.6;
+}
+
+/* Domain Filter Tabs */
+.domainTabsWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+  padding: 0 8%;
+  position: relative;
+  z-index: 2;
+}
+
+.domainTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.6rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(12px);
+  justify-content: center;
+}
+
+.domainTabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.domainTabBtn:hover {
+  color: var(--text);
+  background: var(--glass);
+}
+
+.domainTabBtnActive {
+  background: linear-gradient(135deg, var(--cyan), var(--purple)) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.35);
+}
+
+/* Domains Grid */
+.domainsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  gap: 2.8rem;
+  max-width: 1200px;
+  margin: 0 auto 5rem;
+  padding: 0 8%;
+  position: relative;
+  z-index: 2;
+}
+
+.domainCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 2.8rem;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+}
+
+.domainCard:hover {
+  border-color: rgba(0, 212, 255, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.domainCardHighlighted {
+  border-color: var(--cyan) !important;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.25);
+  background: radial-gradient(circle at top right, rgba(0, 212, 255, 0.05), var(--surface));
+}
+
+.domainCardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.domainHeaderLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.domainBadge {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cyan);
+  padding: 0.25rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  width: fit-content;
+}
+
+.domainTitle {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 2.2vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.activeRoleTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.domainDesc {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+/* Skill Items Pill Grid inside Domain Card */
+.skillsPillGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.skillItemPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--radius-sm);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.skillItemPill:hover {
+  background: var(--surface);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.skillItemName {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.skillLevelBadge {
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.levelAdv {
+  background: rgba(0, 212, 255, 0.12);
+  color: var(--cyan);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+}
+
+.levelInt {
+  background: rgba(168, 85, 247, 0.12);
+  color: var(--purple);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.softInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.softDescText {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.achieveInst {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+}
+
+.achieveMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.achieveRoleBadge {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+}
+
 @media (max-width: 900px) {
+  .domainsGrid {
+    grid-template-columns: 1fr;
+  }
+
   .bottomGrid {
     grid-template-columns: 1fr;
   }
 
   .softGrid {
     grid-template-columns: 1fr;
+  }
+
+  .domainTabs {
+    border-radius: var(--radius-md);
+  }
+
+  .domainTabBtn {
+    font-size: 1.2rem;
+    padding: 0.6rem 1rem;
   }
 }

@@ -1,7 +1,8 @@
-import { useRef, useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState, useCallback, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BsChevronLeft, BsChevronRight, BsAward } from 'react-icons/bs';
 import { certificates } from '../data/portfolioData';
+import { useRole } from '../context/RoleContext';
 import styles from './CertificateSlider.module.css';
 
 const headingVariant = {
@@ -9,12 +10,38 @@ const headingVariant = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
 };
 
+const certCategories = [
+  { key: 'all', label: 'Semua Sertifikat' },
+  { key: 'creative', label: '🎬 Video & Kreatif' },
+  { key: 'tech', label: '💻 Tech & Coding' },
+  { key: 'admin', label: '🏛️ Organisasi & Manajemen' },
+];
+
 export default function CertificateSlider() {
+  const { selectedRole } = useRole();
   const trackRef = useRef(null);
+  const [activeCategory, setActiveCategory] = useState('all');
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [activeIdx, setActiveIdx] = useState(0);
+
+  // Sync category with recruiter role
+  useEffect(() => {
+    if (selectedRole === 'creative' || selectedRole === 'admin' || selectedRole === 'webdev') {
+      const match = selectedRole === 'webdev' ? 'tech' : selectedRole;
+      setActiveCategory(match);
+      setActiveIdx(0);
+      if (trackRef.current) trackRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      setActiveCategory('all');
+      setActiveIdx(0);
+    }
+  }, [selectedRole]);
+
+  const filteredCerts = activeCategory === 'all'
+    ? certificates
+    : certificates.filter((c) => c.category === activeCategory);
 
   // ---- Scroll helpers ----
   const CARD_WIDTH = 320 + 24; // card width + gap
@@ -22,10 +49,10 @@ export default function CertificateSlider() {
   const scrollTo = useCallback((idx) => {
     const el = trackRef.current;
     if (!el) return;
-    const clamped = Math.max(0, Math.min(idx, certificates.length - 1));
+    const clamped = Math.max(0, Math.min(idx, filteredCerts.length - 1));
     setActiveIdx(clamped);
     el.scrollTo({ left: clamped * CARD_WIDTH, behavior: 'smooth' });
-  }, [CARD_WIDTH]);
+  }, [CARD_WIDTH, filteredCerts.length]);
 
   const prev = () => scrollTo(activeIdx - 1);
   const next = () => scrollTo(activeIdx + 1);
@@ -48,10 +75,9 @@ export default function CertificateSlider() {
   const endDrag = () => {
     if (!isDragging) return;
     setIsDragging(false);
-    // Snap to nearest card
     const el = trackRef.current;
     const idx = Math.round(el.scrollLeft / CARD_WIDTH);
-    setActiveIdx(Math.max(0, Math.min(idx, certificates.length - 1)));
+    setActiveIdx(Math.max(0, Math.min(idx, filteredCerts.length - 1)));
   };
 
   // ---- Touch drag ----
@@ -71,7 +97,7 @@ export default function CertificateSlider() {
   const onTouchEnd = () => {
     const el = trackRef.current;
     const idx = Math.round(el.scrollLeft / CARD_WIDTH);
-    const clamped = Math.max(0, Math.min(idx, certificates.length - 1));
+    const clamped = Math.max(0, Math.min(idx, filteredCerts.length - 1));
     setActiveIdx(clamped);
     el.scrollTo({ left: clamped * CARD_WIDTH, behavior: 'smooth' });
   };
@@ -87,7 +113,7 @@ export default function CertificateSlider() {
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
       >
-        My <span className="gradient-text">Certificates</span>
+        Verified <span className="gradient-text">Certificates & Awards</span>
       </motion.h2>
 
       <motion.p
@@ -97,8 +123,33 @@ export default function CertificateSlider() {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        Drag or swipe to explore all {certificates.length} certificates →
+        Sertifikasi kompetensi resmi dalam bidang teknologi, kompetisi video kreatif, kepemimpinan, dan manajemen:
       </motion.p>
+
+      {/* Filter Tabs */}
+      <div className={styles.filterWrapper}>
+        <div className={styles.filterPills}>
+          {certCategories.map((cat) => (
+            <button
+              key={cat.key}
+              type="button"
+              className={`${styles.filterBtn} ${activeCategory === cat.key ? styles.filterBtnActive : ''}`}
+              onClick={() => {
+                setActiveCategory(cat.key);
+                setActiveIdx(0);
+                if (trackRef.current) trackRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+              }}
+            >
+              {cat.label}
+              <span className={styles.certCount}>
+                ({cat.key === 'all'
+                  ? certificates.length
+                  : certificates.filter((c) => c.category === cat.key).length})
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Slider wrapper */}
       <div className={styles.sliderWrapper}>
@@ -124,14 +175,13 @@ export default function CertificateSlider() {
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          {certificates.map((cert, idx) => (
+          {filteredCerts.map((cert, idx) => (
             <motion.div
               key={cert.id}
               className={`${styles.card} ${idx === activeIdx ? styles.cardActive : ''}`}
               initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: idx * 0.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: idx * 0.04 }}
               onClick={() => scrollTo(idx)}
             >
               <div className={styles.cardImgWrap}>
@@ -159,7 +209,7 @@ export default function CertificateSlider() {
 
         {/* Right Arrow */}
         <button
-          className={`${styles.arrow} ${styles.arrowRight} ${activeIdx === certificates.length - 1 ? styles.arrowDisabled : ''}`}
+          className={`${styles.arrow} ${styles.arrowRight} ${activeIdx === filteredCerts.length - 1 ? styles.arrowDisabled : ''}`}
           onClick={next}
           aria-label="Next certificate"
           id="cert-next-btn"
@@ -170,7 +220,7 @@ export default function CertificateSlider() {
 
       {/* Dot Indicators */}
       <div className={styles.dots} role="tablist" aria-label="Certificate navigation">
-        {certificates.map((_, idx) => (
+        {filteredCerts.map((_, idx) => (
           <button
             key={idx}
             className={`${styles.dot} ${idx === activeIdx ? styles.dotActive : ''}`}
@@ -187,7 +237,7 @@ export default function CertificateSlider() {
       <div className={styles.counter}>
         <span className={styles.counterCurrent}>{String(activeIdx + 1).padStart(2, '0')}</span>
         <span className={styles.counterSep}>/</span>
-        <span className={styles.counterTotal}>{String(certificates.length).padStart(2, '0')}</span>
+        <span className={styles.counterTotal}>{String(filteredCerts.length).padStart(2, '0')}</span>
       </div>
     </section>
   );

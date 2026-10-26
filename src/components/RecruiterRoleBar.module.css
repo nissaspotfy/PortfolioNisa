@@ -1,0 +1,352 @@
+/* ============================================================
+   RECRUITER ROLE BAR — CSS Module
+   ============================================================ */
+
+.section {
+  padding: 3.5rem 8%;
+  position: relative;
+  overflow: hidden;
+}
+
+.bgGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75vw;
+  height: 250px;
+  background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.08), rgba(168, 85, 247, 0.05), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 2.8rem;
+}
+
+.topBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.6rem;
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: var(--radius-full);
+  color: var(--cyan);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+
+.title {
+  font-family: var(--font-head);
+  font-size: clamp(2.4rem, 3.8vw, 4rem);
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 1.2rem;
+  color: var(--text);
+}
+
+.description {
+  font-size: clamp(1.4rem, 1.6vw, 1.6rem);
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Tabs */
+.tabsWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.4rem;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.6rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  justify-content: center;
+}
+
+.tabBtn {
+  position: relative;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabBtn:hover {
+  color: var(--text);
+}
+
+.tabBtnActive {
+  color: #ffffff !important;
+}
+
+.activePillBackground {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.35);
+  z-index: 0;
+}
+
+.tabContent {
+  position: relative;
+  z-index: 1;
+}
+
+/* Panel */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 3.2rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s ease;
+}
+
+.panel:hover {
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+.panelTop {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.roleHeadingWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.roleBadge {
+  align-self: flex-start;
+  padding: 0.4rem 1.4rem;
+  border-radius: var(--radius-full);
+  background: var(--purple-dim);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: var(--purple);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.panelHeadline {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 2.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+/* Target roles */
+.targetSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.targetLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.targetPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.posPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  font-size: 1.35rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.pillCheck {
+  color: #10b981;
+}
+
+/* Summary */
+.panelSummary {
+  font-size: clamp(1.45rem, 1.6vw, 1.65rem);
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 2.8rem;
+}
+
+/* Panel Actions */
+.panelActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.cvBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.1rem 2.2rem;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  color: #ffffff;
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.25);
+}
+
+.cvBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+.hireBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.1rem 2.2rem;
+  border-radius: var(--radius-full);
+  background: var(--glass);
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.hireBtn:hover {
+  background: var(--cyan);
+  color: #050510;
+  transform: translateY(-2px);
+}
+
+.jumpBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.1rem 1.8rem;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jumpBtn:hover {
+  border-color: var(--purple);
+  color: var(--text);
+  background: var(--glass);
+}
+
+.jumpBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.1rem 1.8rem;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jumpBtnSecondary:hover {
+  border-color: var(--cyan);
+  color: var(--text);
+  background: var(--glass);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 5%;
+  }
+
+  .tabs {
+    border-radius: var(--radius-md);
+    width: 100%;
+  }
+
+  .tabBtn {
+    flex: 1 1 calc(50% - 0.8rem);
+    font-size: 1.25rem;
+    padding: 0.8rem 1.2rem;
+    text-align: center;
+  }
+
+  .panel {
+    padding: 2.2rem 1.8rem;
+  }
+
+  .panelActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cvBtn, .hireBtn, .jumpBtn, .jumpBtnSecondary {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+}

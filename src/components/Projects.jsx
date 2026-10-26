@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projectExperiences } from '../data/portfolioData';
+import { useRole } from '../context/RoleContext';
 import {
   HiOutlineCode,
   HiOutlineCalendar,
@@ -10,22 +11,45 @@ import {
   HiOutlineCheck,
   HiChevronDown,
   HiChevronUp,
+  HiOutlineDocumentText,
+  HiOutlineFolder,
+  HiOutlineSparkles,
 } from 'react-icons/hi';
+import { FaGithub, FaYoutube } from 'react-icons/fa';
 import styles from './Projects.module.css';
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.15 } },
+  show: { transition: { staggerChildren: 0.12 } },
 };
 
 const cardVariant = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
+  hidden: { opacity: 0, y: 35 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
+const categories = [
+  { key: 'all', label: 'Semua Karya', icon: '🌟' },
+  { key: 'webdev', label: 'Web & Software', icon: '💻' },
+  { key: 'analyst_writer', label: 'Technical Writing & SRS', icon: '📊' },
+  { key: 'creative', label: 'Content & Media', icon: '✍️' },
+  { key: 'admin', label: 'Administrasi & Pengarsipan', icon: '📂' },
+];
+
 export default function Projects() {
+  const { selectedRole } = useRole();
+  const [activeFilter, setActiveFilter] = useState('all');
   const [copiedId, setCopiedId] = useState(null);
   const [showAll, setShowAll] = useState(false);
+
+  // Auto-sync category filter when recruiter changes the global role
+  useEffect(() => {
+    if (selectedRole && selectedRole !== 'all') {
+      setActiveFilter(selectedRole);
+    } else {
+      setActiveFilter('all');
+    }
+  }, [selectedRole]);
 
   const handleCopyIsbn = (id, isbn) => {
     navigator.clipboard.writeText(isbn);
@@ -33,7 +57,19 @@ export default function Projects() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const displayedProjects = showAll ? projectExperiences : projectExperiences.slice(0, 4);
+  const filteredProjects = activeFilter === 'all'
+    ? projectExperiences
+    : projectExperiences.filter((p) => p.categoryKey === activeFilter);
+
+  const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 4);
+
+  const getCardIcon = (project) => {
+    if (project.isTextbook) return <HiOutlineBookOpen size={22} />;
+    if (project.categoryKey === 'admin') return <HiOutlineFolder size={22} />;
+    if (project.categoryKey === 'creative') return <HiOutlineSparkles size={22} />;
+    if (project.categoryKey === 'analyst_writer') return <HiOutlineDocumentText size={22} />;
+    return <HiOutlineCode size={22} />;
+  };
 
   return (
     <section className={styles.section} id="projects">
@@ -46,17 +82,47 @@ export default function Projects() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-        Project <span className="gradient-text">Experiences</span>
+        Curated <span className="gradient-text">Portfolio Works</span>
       </motion.h2>
 
+      <p className={styles.sectionSubtitle}>
+        Jelajahi karya nyata berdasarkan keahlian teknis, dokumentasi sistem, produksi konten kreatif, dan tata kelola administrasi:
+      </p>
+
+      {/* Category Filter Pills */}
+      <div className={styles.filterWrapper}>
+        <div className={styles.filterPills}>
+          {categories.map((cat) => (
+            <button
+              key={cat.key}
+              type="button"
+              className={`${styles.filterBtn} ${activeFilter === cat.key ? styles.filterBtnActive : ''}`}
+              onClick={() => {
+                setActiveFilter(cat.key);
+                setShowAll(false);
+              }}
+            >
+              <span>{cat.icon}</span>
+              <span>{cat.label}</span>
+              <span className={styles.countBadge}>
+                {cat.key === 'all'
+                  ? projectExperiences.length
+                  : projectExperiences.filter((p) => p.categoryKey === cat.key).length}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Projects Grid */}
       <motion.div
         className={styles.grid}
         variants={container}
         initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.1 }}
+        animate="show"
+        layout
       >
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {displayedProjects.map((project) => (
             <motion.div
               key={project.id}
@@ -64,13 +130,13 @@ export default function Projects() {
               variants={cardVariant}
               initial="hidden"
               animate="show"
-              exit={{ opacity: 0, y: 20 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               layout
             >
               {/* Header: Position & Time / Category */}
               <div className={styles.topHeader}>
                 <div className={styles.iconWrap}>
-                  {project.isTextbook ? <HiOutlineBookOpen size={22} /> : <HiOutlineCode size={22} />}
+                  {getCardIcon(project)}
                 </div>
                 <div className={styles.headerInfo}>
                   <span className={styles.roleTag}>{project.role}</span>
@@ -117,6 +183,17 @@ export default function Projects() {
                 <h3 className={styles.title}>{project.title}</h3>
                 <p className={styles.institution}>{project.institution}</p>
 
+                {/* Key Bullet Points */}
+                {project.points && (
+                  <ul className={styles.bulletList}>
+                    {project.points.slice(0, 3).map((pt, idx) => (
+                      <li key={idx} className={styles.bulletItem}>
+                        <span className={styles.bulletCheck}>▹</span> {pt}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
                 {/* Interactive Copyable ISBN Badge */}
                 {project.isbn && (
                   <button
@@ -142,8 +219,69 @@ export default function Projects() {
                   </button>
                 )}
 
-                {/* Action Buttons */}
+                {/* Action Buttons & Badges */}
                 <div className={styles.actionRow}>
+                  {/* SRS Document Button */}
+                  {project.srsUrl && (
+                    <a
+                      href={project.srsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.srsBtn}
+                      title="View SRS Document (PDF)"
+                    >
+                      <HiOutlineDocumentText size={16} />
+                      <span>SRS Document</span>
+                      <HiOutlineExternalLink size={14} />
+                    </a>
+                  )}
+
+                  {/* GitHub Repo */}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.gitBtn}
+                      title="View GitHub Repository"
+                    >
+                      <FaGithub size={15} />
+                      <span>GitHub</span>
+                    </a>
+                  )}
+
+                  {/* Video URL */}
+                  {project.videoUrl && (
+                    <a
+                      href={project.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.videoBtn}
+                      title="Watch Content / Video"
+                    >
+                      <FaYoutube size={16} />
+                      <span>Watch Video</span>
+                    </a>
+                  )}
+
+                  {/* Live Demo or Deployment Status Badge */}
+                  {project.demoUrl ? (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.demoBtn}
+                    >
+                      <span>Live Demo</span>
+                      <HiOutlineExternalLink size={15} />
+                    </a>
+                  ) : !project.isTextbook ? (
+                    <span className={styles.readyBadge}>
+                      {project.badgeStatus || '🚀 Verified Project'}
+                    </span>
+                  ) : null}
+
+                  {/* Textbook links */}
                   {project.storeUrl && (
                     <a
                       href={project.storeUrl}
@@ -167,34 +305,6 @@ export default function Projects() {
                       <HiOutlineExternalLink size={15} />
                     </a>
                   )}
-
-                  {project.srsUrl && (
-                    <a
-                      href={project.srsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.srsBtn}
-                    >
-                      <span>View SRS Document (PDF)</span>
-                      <HiOutlineExternalLink size={15} />
-                    </a>
-                  )}
-
-                  {project.demoUrl ? (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.demoBtn}
-                    >
-                      <span>Live Demo</span>
-                      <HiOutlineExternalLink size={15} />
-                    </a>
-                  ) : (!project.isTextbook && !project.srsUrl) ? (
-                    <span className={styles.readyBadge}>
-                      {project.badgeStatus || '🚀 Deployment Ready'}
-                    </span>
-                  ) : null}
                 </div>
 
                 {/* Tech Tags at the bottom */}
@@ -212,7 +322,7 @@ export default function Projects() {
       </motion.div>
 
       {/* Read More / Load More Button */}
-      {projectExperiences.length > 4 && (
+      {filteredProjects.length > 4 && (
         <div className={styles.loadMoreWrap}>
           <button
             type="button"
@@ -221,8 +331,8 @@ export default function Projects() {
           >
             <span>
               {showAll
-                ? 'Show Less Projects'
-                : `View More Projects (+${projectExperiences.length - 4} More)`}
+                ? 'Tampilkan Lebih Sedikit'
+                : `Tampilkan Semua Karya (${filteredProjects.length} Karya)`}
             </span>
             {showAll ? <HiChevronUp size={20} /> : <HiChevronDown size={20} />}
           </button>

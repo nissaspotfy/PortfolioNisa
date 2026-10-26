@@ -57,7 +57,14 @@
   max-width: 600px;
 }
 
-/* Available badge */
+/* Available badge & Recruiter lens row */
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -73,6 +80,28 @@
   width: fit-content;
 }
 
+.hrLensLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  background: var(--purple-dim);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--purple);
+  transition: all 0.2s ease;
+}
+
+.hrLensLink:hover {
+  background: var(--purple);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+}
+
 .badgeDot {
   width: 8px;
   height: 8px;
@@ -85,6 +114,64 @@
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Quick Role Bar inside Hero */
+.heroRoleBar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.8rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(8px);
+}
+
+.heroRoleLabel {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.heroRoleChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.heroRoleChip {
+  padding: 0.4rem 1.1rem;
+  border-radius: var(--radius-full);
+  background: var(--glass);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.heroRoleChip:hover {
+  color: var(--text);
+  border-color: var(--cyan);
+}
+
+.heroRoleChipActive {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  color: #ffffff !important;
+  border-color: transparent;
+  box-shadow: 0 2px 10px rgba(0, 212, 255, 0.3);
+}
+
+.bioWrapper {
+  min-height: 5.5rem;
 }
 
 /* Heading */

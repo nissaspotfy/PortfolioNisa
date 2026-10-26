@@ -253,8 +253,8 @@
 .actionRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: flex-start;
+  gap: 1.2rem;
   flex-wrap: wrap;
   padding-top: 1.6rem;
   margin-top: auto;
@@ -335,35 +335,43 @@
 .srsBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(0, 212, 255, 0.15));
+  border: 1px solid var(--purple);
   border-radius: var(--radius-full);
   font-family: var(--font-head);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: var(--bg);
+  color: #ffffff;
   transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .srsBtn:hover {
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  color: var(--bg);
+  border-color: transparent;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
 }
 
 .githubBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 0.9rem 1.8rem;
-  background: var(--surface);
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-full);
   font-family: var(--font-head);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--text);
   transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .githubBtn:hover {
@@ -461,6 +469,144 @@
   letter-spacing: 0.03em;
 }
 
+.sectionSubtitle {
+  text-align: center;
+  font-size: clamp(1.4rem, 1.8vw, 1.65rem);
+  color: var(--text-muted);
+  max-width: 750px;
+  margin: -1.6rem auto 3.2rem;
+  line-height: 1.6;
+}
+
+/* Category Filter Pills */
+.filterWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.filterPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.6rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(12px);
+  justify-content: center;
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.filterBtn:hover {
+  color: var(--text);
+  background: var(--glass);
+}
+
+.filterBtnActive {
+  background: linear-gradient(135deg, var(--cyan), var(--purple)) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.35);
+}
+
+.countBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Bullet Points */
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 1.2rem 0 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.bulletItem {
+  font-size: 1.35rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.bulletCheck {
+  color: var(--cyan);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* Git & Video Buttons */
+.gitBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.gitBtn:hover {
+  background: var(--glass);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: translateY(-2px);
+}
+
+.videoBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-sm);
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.videoBtn:hover {
+  background: #ef4444;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.35);
+}
+
 .loadMoreWrap {
   display: flex;
   justify-content: center;
@@ -497,5 +643,14 @@
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .filterPills {
+    border-radius: var(--radius-md);
+  }
+
+  .filterBtn {
+    font-size: 1.2rem;
+    padding: 0.6rem 1.1rem;
   }
 }

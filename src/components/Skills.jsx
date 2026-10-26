@@ -1,5 +1,7 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { skills } from '../data/portfolioData';
+import { useRole } from '../context/RoleContext';
 import {
   FaHtml5,
   FaCss3Alt,
@@ -11,6 +13,7 @@ import {
   FaJava,
   FaGithub,
   FaFigma,
+  FaYoutube,
 } from 'react-icons/fa';
 import {
   SiVite,
@@ -26,12 +29,18 @@ import {
   HiOutlineStar,
   HiOutlineCube,
   HiOutlineCode,
+  HiOutlineDocumentText,
+  HiOutlineFolder,
+  HiOutlinePencilAlt,
+  HiOutlineClipboardList,
+  HiOutlineShare,
+  HiCheckCircle,
 } from 'react-icons/hi';
 import styles from './Skills.module.css';
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.08 } },
 };
 
 const itemVariant = {
@@ -79,15 +88,43 @@ const getTechIcon = (iconKey) => {
       return <SiMysql size={22} color="#4479A1" />;
     case 'uml':
       return <HiOutlineCube size={22} color="#A855F7" />;
+    case 'srs':
+      return <HiOutlineDocumentText size={22} color="#00D4FF" />;
+    case 'archive':
+      return <HiOutlineFolder size={22} color="#10B981" />;
+    case 'video':
+      return <FaYoutube size={22} color="#EF4444" />;
+    case 'pen':
+      return <HiOutlinePencilAlt size={22} color="#F59E0B" />;
+    case 'office':
+      return <HiOutlineClipboardList size={22} color="#3B82F6" />;
+    case 'social':
+      return <HiOutlineShare size={22} color="#EC4899" />;
     default:
       return <HiOutlineCode size={22} color="#00D4FF" />;
   }
 };
 
 export default function Skills() {
+  const { selectedRole } = useRole();
+  const [activeTab, setActiveTab] = useState('all');
+
+  // Auto-sync tab when HR chooses a role
+  useEffect(() => {
+    if (selectedRole && selectedRole !== 'all') {
+      setActiveTab(selectedRole);
+    } else {
+      setActiveTab('all');
+    }
+  }, [selectedRole]);
+
   // Multiply rows 3 times to ensure infinite smooth marquee animation
   const row1Triple = [...skills.row1, ...skills.row1, ...skills.row1];
   const row2Triple = [...skills.row2, ...skills.row2, ...skills.row2];
+
+  const displayedCategories = activeTab === 'all'
+    ? skills.categories
+    : skills.categories.filter((cat) => cat.id === activeTab);
 
   return (
     <section className={styles.section} id="skills">
@@ -100,8 +137,12 @@ export default function Skills() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-        Skills & <span className="gradient-text">Achievements</span>
+        Skills & <span className="gradient-text">Core Competencies</span>
       </motion.h2>
+
+      <p className={styles.sectionSubtitle}>
+        Daftar instrumen teknologi, metodologi dokumentasi, keahlian kreatif, dan kompetensi administrasi yang dikuasai:
+      </p>
 
       {/* 🚀 Infinite Animated Tech Marquee Ticker */}
       <div className={styles.marqueeWrapper}>
@@ -133,6 +174,74 @@ export default function Skills() {
         </div>
       </div>
 
+      {/* 🎯 Domain Filter Tabs for HR */}
+      <div className={styles.domainTabsWrap}>
+        <div className={styles.domainTabs}>
+          <button
+            type="button"
+            className={`${styles.domainTabBtn} ${activeTab === 'all' ? styles.domainTabBtnActive : ''}`}
+            onClick={() => setActiveTab('all')}
+          >
+            🌟 Semua Bidang (All Domains)
+          </button>
+          {skills.categories.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              className={`${styles.domainTabBtn} ${activeTab === cat.id ? styles.domainTabBtnActive : ''}`}
+              onClick={() => setActiveTab(cat.id)}
+            >
+              {cat.title}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* 📦 Structured Domain Competencies Grid */}
+      <div className={styles.domainsGrid}>
+        <AnimatePresence mode="popLayout">
+          {displayedCategories.map((cat) => {
+            const isHighlighted = selectedRole === cat.id;
+            return (
+              <motion.div
+                key={cat.id}
+                className={`${styles.domainCard} ${isHighlighted ? styles.domainCardHighlighted : ''}`}
+                variants={itemVariant}
+                initial="hidden"
+                animate="show"
+                exit={{ opacity: 0, scale: 0.95 }}
+                layout
+              >
+                <div className={styles.domainCardHeader}>
+                  <div className={styles.domainHeaderLeft}>
+                    <span className={styles.domainBadge}>{cat.badge}</span>
+                    <h3 className={styles.domainTitle}>{cat.title}</h3>
+                  </div>
+                  {isHighlighted && (
+                    <span className={styles.activeRoleTag}>
+                      <HiCheckCircle size={14} /> Posisi Terpilih
+                    </span>
+                  )}
+                </div>
+
+                <p className={styles.domainDesc}>{cat.description}</p>
+
+                <div className={styles.skillsPillGrid}>
+                  {cat.skills.map((s, idx) => (
+                    <div key={idx} className={styles.skillItemPill}>
+                      <span className={styles.skillItemName}>{s.name}</span>
+                      <span className={`${styles.skillLevelBadge} ${s.level === 'Advanced' ? styles.levelAdv : styles.levelInt}`}>
+                        {s.level}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </div>
+
       {/* 🎯 Soft Skills & Achievements Grid */}
       <div className={styles.bottomGrid}>
         {/* Soft Skills */}
@@ -146,8 +255,8 @@ export default function Skills() {
           <div className={styles.blockHeader}>
             <HiOutlineSparkles size={26} className={styles.iconPurple} />
             <div>
-              <h3 className={styles.blockTitle}>Soft Skills</h3>
-              <p className={styles.blockSub}>Interpersonal & Leadership Competencies</p>
+              <h3 className={styles.blockTitle}>Interpersonal & Professional Ethic</h3>
+              <p className={styles.blockSub}>Karakter Kerja & Keterampilan Komunikasi</p>
             </div>
           </div>
 
@@ -155,7 +264,10 @@ export default function Skills() {
             {skills.softSkills.map((soft, idx) => (
               <motion.div key={idx} className={styles.softCard} variants={itemVariant}>
                 <span className={styles.softEmoji}>{soft.icon}</span>
-                <span className={styles.softText}>{soft.name}</span>
+                <div className={styles.softInfo}>
+                  <span className={styles.softText}>{soft.name}</span>
+                  {soft.desc && <span className={styles.softDescText}>{soft.desc}</span>}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -172,8 +284,8 @@ export default function Skills() {
           <div className={styles.blockHeader}>
             <HiOutlineStar size={26} className={styles.iconGold} />
             <div>
-              <h3 className={styles.blockTitle}>Honors & Achievements</h3>
-              <p className={styles.blockSub}>Awards & Competition Recognition</p>
+              <h3 className={styles.blockTitle}>Honors & Key Milestones</h3>
+              <p className={styles.blockSub}>Penghargaan & Pengakuan Kompetensi</p>
             </div>
           </div>
 
@@ -183,7 +295,11 @@ export default function Skills() {
                 <div className={styles.trophyIcon}>🏆</div>
                 <div className={styles.achieveDetails}>
                   <h4 className={styles.achieveTitle}>{ach.title}</h4>
-                  <span className={styles.achieveYear}>{ach.year}</span>
+                  <span className={styles.achieveInst}>{ach.institution}</span>
+                  <div className={styles.achieveMeta}>
+                    <span className={styles.achieveYear}>{ach.year}</span>
+                    <span className={styles.achieveRoleBadge}>{ach.role}</span>
+                  </div>
                 </div>
               </motion.div>
             ))}

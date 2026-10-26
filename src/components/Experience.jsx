@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { professionalExperiences } from '../data/portfolioData';
-import { HiOutlineUserGroup, HiOutlineCalendar, HiOutlineDocumentText, HiChevronDown, HiChevronUp } from 'react-icons/hi';
+import { useRole } from '../context/RoleContext';
+import { HiOutlineUserGroup, HiOutlineCalendar, HiOutlineDocumentText, HiChevronDown, HiChevronUp, HiOutlineSparkles } from 'react-icons/hi';
 import styles from './Experience.module.css';
 
 const container = {
@@ -10,14 +11,36 @@ const container = {
 };
 
 const cardVariant = {
-  hidden: { opacity: 0, y: 40 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
+  hidden: { opacity: 0, y: 35 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
+const filterTabs = [
+  { key: 'all', label: 'Semua Pengalaman' },
+  { key: 'admin', label: '📂 Administrasi & Kesekretariatan' },
+  { key: 'webdev', label: '💻 Asisten Lab & Tech' },
+  { key: 'creative', label: '✍️ Publikasi & Desain Media' },
+];
+
 export default function Experience() {
+  const { selectedRole } = useRole();
+  const [activeFilter, setActiveFilter] = useState('all');
   const [showAll, setShowAll] = useState(false);
 
-  const displayedExperiences = showAll ? professionalExperiences : professionalExperiences.slice(0, 4);
+  // Sync with selectedRole when changed by recruiter
+  useEffect(() => {
+    if (selectedRole === 'admin' || selectedRole === 'webdev' || selectedRole === 'creative') {
+      setActiveFilter(selectedRole);
+    } else {
+      setActiveFilter('all');
+    }
+  }, [selectedRole]);
+
+  const filtered = activeFilter === 'all'
+    ? professionalExperiences
+    : professionalExperiences.filter((e) => e.roleCategory === activeFilter);
+
+  const displayedExperiences = showAll ? filtered : filtered.slice(0, 4);
 
   return (
     <section className={styles.section} id="experience">
@@ -30,8 +53,31 @@ export default function Experience() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.7 }}
       >
-        Professional <span className="gradient-text">Experience</span>
+        Professional & <span className="gradient-text">Organizational Track</span>
       </motion.h2>
+
+      <p className={styles.sectionSubtitle}>
+        Rekam jejak kepemimpinan, tata kelola administrasi organisasi, asistensi akademik, dan publikasi media:
+      </p>
+
+      {/* Filter Tabs */}
+      <div className={styles.filterWrapper}>
+        <div className={styles.filterPills}>
+          {filterTabs.map((tab) => (
+            <button
+              key={tab.key}
+              type="button"
+              className={`${styles.filterBtn} ${activeFilter === tab.key ? styles.filterBtnActive : ''}`}
+              onClick={() => {
+                setActiveFilter(tab.key);
+                setShowAll(false);
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <motion.div
         className={styles.grid}
@@ -40,15 +86,15 @@ export default function Experience() {
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
       >
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {displayedExperiences.map((exp) => (
             <motion.div
               key={exp.id}
-              className={styles.card}
+              className={`${styles.card} ${selectedRole === exp.roleCategory ? styles.cardRoleMatched : ''}`}
               variants={cardVariant}
               initial="hidden"
               animate="show"
-              exit={{ opacity: 0, y: 20 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               layout
             >
               {/* Card Header: Role & Period */}
@@ -57,6 +103,9 @@ export default function Experience() {
                   <HiOutlineUserGroup size={22} />
                 </div>
                 <div className={styles.headerText}>
+                  {exp.categoryBadge && (
+                    <span className={styles.categoryBadge}>{exp.categoryBadge}</span>
+                  )}
                   <span className={styles.period}>
                     <HiOutlineCalendar size={14} /> {exp.period}
                   </span>
@@ -76,7 +125,7 @@ export default function Experience() {
                     loading="lazy"
                   />
                   <div className={styles.imageOverlay} />
-                  <span className={styles.imageBadge}>📸 Activity Documentation</span>
+                  <span className={styles.imageBadge}>📸 Dokumentasi Aktivitas</span>
                 </div>
               )}
 
@@ -85,7 +134,7 @@ export default function Experience() {
                 <div className={styles.noteBox}>
                   <div className={styles.noteHeader}>
                     <HiOutlineDocumentText size={16} />
-                    <span>Activity Summary & Overview</span>
+                    <span>Ikhtisar Tanggung Jawab & Kontribusi</span>
                   </div>
                   <p className={styles.noteText}>{exp.note}</p>
                 </div>
@@ -107,7 +156,7 @@ export default function Experience() {
       </motion.div>
 
       {/* Read More / Load More Button */}
-      {professionalExperiences.length > 4 && (
+      {filtered.length > 4 && (
         <div className={styles.loadMoreWrap}>
           <button
             type="button"
@@ -116,8 +165,8 @@ export default function Experience() {
           >
             <span>
               {showAll
-                ? 'Show Less Experiences'
-                : `View More Experiences (+${professionalExperiences.length - 4} More)`}
+                ? 'Tampilkan Lebih Sedikit'
+                : `Tampilkan Semua Pengalaman (${filtered.length} Aktivitas)`}
             </span>
             {showAll ? <HiChevronUp size={20} /> : <HiChevronDown size={20} />}
           </button>

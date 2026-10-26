@@ -1,14 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi';
-import { personalDetails, navLinks, hireMailtoUrl } from '../data/portfolioData';
+import { FiMenu, FiX, FiSun, FiMoon, FiChevronDown } from 'react-icons/fi';
+import { navLinks } from '../data/portfolioData';
+import { useRole } from '../context/RoleContext';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
+  const { selectedRole, selectRole, activeProfile, currentHireMailtoUrl, rolesList } = useRole();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeId, setActiveId] = useState('home');
+  const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
+  const [activeId, setActiveId] = useState('projects');
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setRoleDropdownOpen(false);
+      }
+    };
+    if (roleDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [roleDropdownOpen]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -47,6 +63,7 @@ export default function Navbar() {
 
   const handleNav = (href) => {
     setMenuOpen(false);
+    setRoleDropdownOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -76,8 +93,51 @@ export default function Navbar() {
         ))}
       </nav>
 
-      {/* Actions Group: Theme Toggle & Hire Button */}
+      {/* Actions Group: Role Selector, Theme Toggle & Hire Button */}
       <div className={styles.headerActions}>
+        {/* Recruiter Quick Selector Dropdown */}
+        <div className={styles.roleDropdownWrapper} ref={dropdownRef}>
+          <button
+            type="button"
+            className={styles.roleDropdownBtn}
+            onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
+            title="Ganti Mode / Role Profil"
+            aria-expanded={roleDropdownOpen}
+          >
+            <span className={styles.roleDot} />
+            <span className={styles.roleCurrentText}>{activeProfile.shortLabel}</span>
+            <FiChevronDown size={14} className={`${styles.dropdownChevron} ${roleDropdownOpen ? styles.chevronRotated : ''}`} />
+          </button>
+
+          <AnimatePresence>
+            {roleDropdownOpen && (
+              <motion.div
+                className={styles.roleDropdownMenu}
+                initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className={styles.dropdownHeaderTitle}>Pilih Fokus Role:</div>
+                {rolesList.map((r) => (
+                  <button
+                    key={r.id}
+                    type="button"
+                    className={`${styles.dropdownItem} ${selectedRole === r.id ? styles.dropdownItemActive : ''}`}
+                    onClick={() => {
+                      selectRole(r.id);
+                      setRoleDropdownOpen(false);
+                    }}
+                  >
+                    <span>{r.label}</span>
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Theme Toggle */}
         <button
           type="button"
           className={styles.themeToggleBtn}
@@ -88,9 +148,11 @@ export default function Navbar() {
           {theme === 'dark' ? <FiSun size={18} /> : <FiMoon size={18} />}
         </button>
 
+        {/* Hire Me Button */}
         <a
-          href={hireMailtoUrl}
+          href={currentHireMailtoUrl}
           className={styles.hireBtn}
+          title={`Hire Anissa for ${activeProfile.emailRole}`}
         >
           <span>Hire Me</span>
         </a>
@@ -116,6 +178,23 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
           >
+            {/* Mobile Role Switcher */}
+            <div className={styles.mobileRoleBox}>
+              <span className={styles.mobileRoleTitle}>🎯 Pilih Mode / Posisi:</span>
+              <div className={styles.mobileRoleGrid}>
+                {rolesList.map((r) => (
+                  <button
+                    key={r.id}
+                    type="button"
+                    className={`${styles.mobileRolePill} ${selectedRole === r.id ? styles.mobileRolePillActive : ''}`}
+                    onClick={() => selectRole(r.id)}
+                  >
+                    {r.shortLabel}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {navLinks.map((link, i) => (
               <motion.a
                 key={link.href}
@@ -124,20 +203,20 @@ export default function Navbar() {
                 onClick={(e) => { e.preventDefault(); handleNav(link.href); }}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.06 }}
+                transition={{ delay: i * 0.05 }}
               >
                 {link.label}
               </motion.a>
             ))}
 
             <motion.a
-              href={hireMailtoUrl}
+              href={currentHireMailtoUrl}
               className={styles.mobileHireBtn}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.06 }}
+              transition={{ delay: navLinks.length * 0.05 }}
             >
-              <span>Hire Me</span>
+              <span>Hire Me ({activeProfile.shortLabel})</span>
             </motion.a>
           </motion.div>
         )}
