@@ -143,17 +143,19 @@ export default function Hero() {
               <span>Hire Me</span>
               <HiOutlineMail size={18} />
             </a>
-            <a
-              href={activeProfile.cvFile}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.btnOutline}
-              id="contact-btn"
-              title={activeProfile.cvLabel}
-            >
-              <span>View CV ({activeProfile.shortLabel})</span>
-              <BsArrowUpRight size={15} />
-            </a>
+            {selectedRole !== 'all' && (
+              <a
+                href={activeProfile.cvFile}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnOutline}
+                id="contact-btn"
+                title={activeProfile.cvLabel}
+              >
+                <span>View CV ({activeProfile.shortLabel})</span>
+                <BsArrowUpRight size={15} />
+              </a>
+            )}
           </motion.div>
         </motion.div>
 

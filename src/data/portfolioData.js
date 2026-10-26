@@ -13,7 +13,7 @@ export const personalDetails = {
   website: 'https://anissanursafitri.vercel.app/',
   address: 'Jl. Cijambe Pakojan Kp. Cipeundeuy RT/RW : 005/010, Kel. Sukakarya, Kec. Warudoyong, Kota Sukabumi, Jawa Barat',
   summary:
-    'A versatile and detail-oriented Fresh Graduate in Informatics Engineering (GPA 3.64) from Universitas Pasundan. Equipped with multi-disciplinary competence spanning Fullstack Web Development & AI, IEEE-standard System Analysis & Technical Writing, Award-winning Creative Video & Content Creation, and Executive Secretarial Administration & Document Archiving. Highly adaptable, proactive, and ready to deliver measurable value tailored to organizational needs.',
+    'Informatics Engineering graduate bridging the gap between technical systems and digital creativity. Experienced in full-stack web development, system requirement analysis, technical documentation, and creative content creation to build comprehensive, user-centric digital experiences.',
 };
 
 export const ROLES = {
@@ -32,7 +32,7 @@ export const roleProfiles = {
     badge: '🌟 Multi-Disciplinary Talent',
     headline: 'Informatics Graduate bridging Software Engineering, Technical Writing, Creative Media, and Office Administration.',
     summary:
-      'A versatile and detail-oriented Fresh Graduate in Informatics Engineering (GPA 3.64) with cross-functional competence spanning Fullstack Web Development & AI, IEEE-standard System Analysis & Technical Writing, Award-winning Creative Content Creation, and Executive Secretarial Administration & Document Archiving.',
+      'Informatics Engineering graduate bridging the gap between technical systems and digital creativity. Experienced in full-stack web development, system requirement analysis, technical documentation, and creative content creation to build comprehensive, user-centric digital experiences.',
     targetPositions: [
       'Software Engineer / Web Developer',
       'System Analyst & Technical Writer',
@@ -70,7 +70,7 @@ export const roleProfiles = {
       { text: '⚛️ React.js & Express.js', icon: '🔥' },
     ],
     emailRole: 'Software Engineer / Web Developer',
-    cvFile: '/CV_Anissa_Nursafitri.pdf',
+    cvFile: '/CV_Anissa_Nursafitri_SoftwareEngineer.pdf',
     cvLabel: 'Download Software Engineer CV',
     accentColor: 'cyan',
   },
@@ -94,8 +94,8 @@ export const roleProfiles = {
       { text: '📊 UML & Workflow Architecture', icon: '💡' },
     ],
     emailRole: 'Technical Writer / System Analyst',
-    cvFile: '/CV_Anissa_Nursafitri.pdf',
-    cvLabel: 'Download Technical Writer & Analyst CV',
+    cvFile: '/CV_Anissa_Nursafitri_SystemAnalyst_TW.pdf',
+    cvLabel: 'Download System Analyst & TW Resume',
     accentColor: 'purple',
   },
   creative: {
@@ -119,8 +119,8 @@ export const roleProfiles = {
       { text: '🎨 UI/UX Design Finalist', icon: '✨' },
     ],
     emailRole: 'Content Creator / Content Writer / Social Media',
-    cvFile: '/CV_Anissa_Nursafitri.pdf',
-    cvLabel: 'Download Creative & Media Portfolio CV',
+    cvFile: '/CV_Anissa_Nursafitri_Creative.pdf',
+    cvLabel: 'Download Content Creator CV',
     accentColor: 'pink',
   },
   admin: {
@@ -144,8 +144,8 @@ export const roleProfiles = {
       { text: '📊 Office & Workspace Management', icon: '💼' },
     ],
     emailRole: 'Staff Administrasi / Sekretaris / Document Archiving',
-    cvFile: '/CV_Anissa_Nursafitri.pdf',
-    cvLabel: 'Download Administration & Secretarial CV',
+    cvFile: '/CV_Anissa_Nursafitri_Admin.pdf',
+    cvLabel: 'Download Administration CV',
     accentColor: 'blue',
   },
 };
@@ -216,9 +216,9 @@ export const projectExperiences = [
     role: 'Fullstack & System Architecture',
     categoryKey: 'webdev',
     badgeStatus: '🛒 Fullstack E-Commerce',
-    image: '/img/final_project_preview.jpg',
+    image: '/img/draosan_preview.png',
     githubUrl: null,
-    demoUrl: null,
+    demoUrl: 'https://draosan-kappa.vercel.app/admin/dashboard',
     srsUrl: '/SRS_Draosan_Anissa_Nursafitri.pdf',
     points: [
       'Authored SRS documentation and UML diagrams (Use Case, Sequence, Class) for system architecture.',
