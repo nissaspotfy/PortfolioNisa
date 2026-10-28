@@ -15,7 +15,7 @@ import {
   HiOutlineFolder,
   HiOutlineSparkles,
 } from 'react-icons/hi';
-import { FaGithub, FaYoutube } from 'react-icons/fa';
+import { FaGithub, FaYoutube, FaFigma } from 'react-icons/fa';
 import styles from './Projects.module.css';
 
 const container = {
@@ -167,13 +167,35 @@ export default function Projects() {
                       </div>
                     </div>
                     <div className={styles.imageWrap}>
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className={styles.projectImg}
-                        loading="lazy"
-                      />
-                      <div className={styles.imageOverlay} />
+                      {project.images && project.images.length > 1 ? (
+                        <div className={styles.dualImageWrap}>
+                          {project.images.map((imgItem, idx) => (
+                            <div key={idx} className={styles.dualImageItem}>
+                              <img
+                                src={imgItem.url}
+                                alt={imgItem.label || project.title}
+                                className={styles.dualProjectImg}
+                                style={imgItem.objectPosition ? { objectPosition: imgItem.objectPosition } : undefined}
+                                loading="lazy"
+                              />
+                              <div className={styles.imageOverlay} />
+                              <span className={styles.dualBadge}>
+                                {imgItem.label}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <>
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className={styles.projectImg}
+                            loading="lazy"
+                          />
+                          <div className={styles.imageOverlay} />
+                        </>
+                      )}
                     </div>
                   </div>
                 )
@@ -225,9 +247,13 @@ export default function Projects() {
                   {project.srsUrl && (
                     <a
                       href={project.srsUrl}
-                      target="_blank"
+                      target={project.srsUrl.startsWith('http') || project.srsUrl.endsWith('.pdf') ? '_blank' : undefined}
                       rel="noopener noreferrer"
                       className={styles.srsBtn}
+                      onClick={project.srsUrl === '#' ? (e) => {
+                        e.preventDefault();
+                        alert('Dokumen SRS E-Waste sedang dipersiapkan dan akan segera dilampirkan.');
+                      } : undefined}
                       title="View SRS Document (PDF)"
                     >
                       <HiOutlineDocumentText size={16} />
@@ -264,20 +290,44 @@ export default function Projects() {
                     </a>
                   )}
 
+                  {/* Figma Prototype URL */}
+                  {project.figmaUrl && (
+                    <a
+                      href={project.figmaUrl}
+                      target={project.figmaUrl.startsWith('http') ? '_blank' : undefined}
+                      rel="noopener noreferrer"
+                      className={styles.figmaBtn}
+                      onClick={project.figmaUrl === '#' ? (e) => {
+                        e.preventDefault();
+                        alert('Desain prototipe UI/UX Figma E-Waste sedang dipersiapkan.');
+                      } : undefined}
+                      title="View Prototype on Figma"
+                    >
+                      <FaFigma size={15} />
+                      <span>Figma Prototype</span>
+                      <HiOutlineExternalLink size={14} />
+                    </a>
+                  )}
+
                   {/* Live Demo or Deployment Status Badge */}
                   {project.demoUrl ? (
                     <a
                       href={project.demoUrl}
-                      target="_blank"
+                      target={project.demoUrl.startsWith('http') ? '_blank' : undefined}
                       rel="noopener noreferrer"
-                      className={styles.demoBtn}
+                      className={`${styles.demoBtn} ${project.srsUrl || project.id === 2 ? styles.demoBtnRight : ''}`}
+                      onClick={project.demoUrl === '#' ? (e) => {
+                        e.preventDefault();
+                        alert('Deployment sedang dipersiapkan. Live Demo akan segera aktif!');
+                      } : undefined}
+                      title={project.demoUrl === '#' ? 'Deployment sedang dipersiapkan' : 'Buka Live Demo'}
                     >
                       <span>Live Demo</span>
                       <HiOutlineExternalLink size={15} />
                     </a>
-                  ) : !project.isTextbook ? (
+                  ) : (!project.isTextbook && project.badgeStatus) ? (
                     <span className={styles.readyBadge}>
-                      {project.badgeStatus || '🚀 Verified Project'}
+                      {project.badgeStatus}
                     </span>
                   ) : null}
 

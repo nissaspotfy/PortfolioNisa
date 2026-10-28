@@ -116,7 +116,25 @@ export default function Experience() {
               <p className={styles.org}>{exp.organization}</p>
 
               {/* Activity Image Box */}
-              {exp.image && (
+              {exp.images && exp.images.length > 1 ? (
+                <div className={styles.dualImageBox}>
+                  {exp.images.map((imgItem, idx) => (
+                    <div key={idx} className={styles.dualImageCol}>
+                      <img
+                        src={imgItem.url}
+                        alt={imgItem.label || exp.role}
+                        className={styles.dualActivityImg}
+                        style={imgItem.objectPosition ? { objectPosition: imgItem.objectPosition } : undefined}
+                        loading="lazy"
+                      />
+                      <div className={styles.imageOverlay} />
+                      <span className={styles.dualImageBadge}>
+                        {imgItem.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : exp.image ? (
                 <div className={styles.imageBox}>
                   <img
                     src={exp.image}
@@ -127,7 +145,7 @@ export default function Experience() {
                   <div className={styles.imageOverlay} />
                   <span className={styles.imageBadge}>📸 Dokumentasi Aktivitas</span>
                 </div>
-              )}
+              ) : null}
 
               {/* Note & Summary Box */}
               {exp.note && (

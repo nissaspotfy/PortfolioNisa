@@ -153,6 +153,64 @@
   pointer-events: none;
 }
 
+/* Dual Image Layout for Multi-Photo Projects */
+.dualImageWrap {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 0.8rem;
+  height: 220px;
+  width: 100%;
+  padding: 0.6rem;
+  background: rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+.dualImageItem {
+  position: relative;
+  height: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.dualImageItem:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: var(--cyan);
+}
+
+.dualProjectImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.dualImageItem:hover .dualProjectImg {
+  transform: scale(1.06);
+}
+
+.dualBadge {
+  position: absolute;
+  bottom: 0.7rem;
+  left: 0.7rem;
+  right: 0.7rem;
+  background: rgba(10, 10, 26, 0.88);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  color: var(--text);
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
 /* Card Content */
 .cardContent {
   padding: 2.8rem;
@@ -357,6 +415,32 @@
   box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
 }
 
+.figmaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  background: linear-gradient(135deg, rgba(242, 78, 30, 0.2), rgba(162, 89, 255, 0.2));
+  border: 1px solid rgba(242, 78, 30, 0.5);
+  border-radius: var(--radius-full);
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.figmaBtn:hover {
+  background: linear-gradient(135deg, #f24e1e, #a259ff);
+  color: #ffffff;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(242, 78, 30, 0.45);
+}
+
 .githubBtn {
   display: inline-flex;
   align-items: center;
@@ -400,6 +484,11 @@
   box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
 }
 
+.demoBtnRight,
+.srsBtn + .demoBtn {
+  margin-left: auto;
+}
+
 .readyBadge {
   display: inline-flex;
   align-items: center;
@@ -428,6 +517,10 @@
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+  .dualImageWrap {
+    grid-template-columns: 1fr;
+    height: 320px;
   }
 }
 
